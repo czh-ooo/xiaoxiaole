@@ -13,7 +13,7 @@
 
 ## 🚀 在线体验
 
-[点击这里开始游戏](https://你的域名.com)
+[点击这里开始游戏](https://czh-ooo.github.io/xiaoxiaole)
 
 ## 🎯 游戏玩法
 
@@ -63,7 +63,7 @@ xiaoxiaole/
 
 1. **克隆项目**
 ```bash
-git clone https://github.com/你的用户名/xiaoxiaole.git
+git clone https://github.com/czh-ooo/xiaoxiaole.git
 cd xiaoxiaole
 ```
 
@@ -108,7 +108,7 @@ php -S localhost:3000
 1. Fork 这个项目
 2. 在仓库设置中启用 GitHub Pages
 3. 选择 main 分支作为源
-4. 访问 `https://你的用户名.github.io/xiaoxiaole`
+4. 访问 `https://czh-ooo.github.io/xiaoxiaole`
 
 ### Netlify 部署
 1. 注册 Netlify 账号
