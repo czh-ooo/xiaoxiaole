@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小小乐 - 可爱的猫咪三消游戏 | 免费在线游戏</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="小小乐是一款可爱的猫咪主题三消游戏，支持手机和电脑。通过交换相邻猫咪形成三连消除，享受真实猫叫音效，完全免费在线游戏。">
+    <meta name="keywords" content="三消游戏,猫咪游戏,在线游戏,免费游戏,消除游戏,小小乐,match3,puzzle game">
+    <meta name="author" content="小小乐游戏开发团队">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://你的域名.com/">
+    <meta property="og:title" content="小小乐 - 可爱的猫咪三消游戏">
+    <meta property="og:description" content="可爱的猫咪主题三消游戏，支持手机和电脑，享受真实猫叫音效！">
+    <meta property="og:image" content="https://你的域名.com/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://你的域名.com/">
+    <meta property="twitter:title" content="小小乐 - 可爱的猫咪三消游戏">
+    <meta property="twitter:description" content="可爱的猫咪主题三消游戏，支持手机和电脑，享受真实猫叫音效！">
+    <meta property="twitter:image" content="https://你的域名.com/images/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 游戏标题区域 -->
+        <header class="game-header">
+            <h1 class="game-title">🐱 小小乐 🐱</h1>
+            <p class="game-subtitle">可爱的三消游戏</p>
+        </header>
+
+        <!-- 游戏信息栏 -->
+        <div class="game-info">
+            <div class="score-section">
+                <div class="score-item">
+                    <span class="score-label">当前分数</span>
+                    <span class="score-value" id="current-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">最高分</span>
+                    <span class="score-value" id="high-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">连击</span>
+                    <span class="score-value" id="combo-count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏棋盘区域 -->
+        <div class="game-board-container">
+            <div class="game-board" id="game-board">
+                <!-- 10x10网格将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <!-- 控制按钮区域 -->
+        <div class="game-controls">
+            <button class="control-btn primary" id="restart-btn">
+                <span class="btn-icon">🔄</span>
+                <span class="btn-text">重新开始</span>
+            </button>
+            <button class="control-btn secondary" id="pause-btn">
+                <span class="btn-icon">⏸️</span>
+                <span class="btn-text">暂停</span>
+            </button>
+            <button class="control-btn secondary" id="sound-btn">
+                <span class="btn-icon">🔊</span>
+                <span class="btn-text">音效</span>
+            </button>
+
+            <button class="control-btn secondary" id="settings-btn">
+                <span class="btn-icon">⚙️</span>
+                <span class="btn-text">设置</span>
+            </button>
+        </div>
+
+        <!-- 游戏状态提示 -->
+        <div class="game-status" id="game-status">
+            <div class="status-message" id="status-message">点击相邻的元素来交换位置！</div>
+        </div>
+
+
+    </div>
+
+    <!-- 游戏结束弹窗 -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2>游戏结束</h2>
+            <p>恭喜你！</p>
+            <div class="final-score">
+                <span>最终分数：</span>
+                <span id="final-score">0</span>
+            </div>
+            <div class="modal-buttons">
+                <button class="control-btn primary" id="restart-modal-btn">再来一局</button>
+                <button class="control-btn secondary" id="close-modal-btn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <h2>游戏设置</h2>
+            <div class="setting-item">
+                <label for="sound-volume">音效音量</label>
+                <input type="range" id="sound-volume" min="0" max="100" value="50">
+            </div>
+            <div class="setting-item">
+                <label for="animation-speed">动画速度</label>
+                <select id="animation-speed">
+                    <option value="slow">慢速</option>
+                    <option value="normal" selected>正常</option>
+                    <option value="fast">快速</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button class="control-btn primary" id="save-settings-btn">保存</button>
+                <button class="control-btn secondary" id="cancel-settings-btn">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <p>游戏加载中...</p>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="js/utils.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/game.js"></script>
+    <script>
+        // 游戏初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const game = new XiaoXiaoLeGame();
+            game.init();
+        });
+    </script>
+</body>
+</html>
