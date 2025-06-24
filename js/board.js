@@ -216,14 +216,8 @@ class GameBoard {
      * @param {number} col2 第二个单元格列
      */
     swapCells(row1, col1, row2, col2) {
-        // 交换数据
-        const temp = this.board[row1][col1];
-        this.board[row1][col1] = this.board[row2][col2];
-        this.board[row2][col2] = temp;
-
-        // 更新DOM
-        this.updateCellDisplay(row1, col1);
-        this.updateCellDisplay(row2, col2);
+        // 执行交换
+        this.performSwap(row1, col1, row2, col2);
 
         // 取消选择
         this.deselectCell();
@@ -238,9 +232,28 @@ class GameBoard {
             // 无效移动，撤销交换
             GameUtils.showMessage('无效移动，已撤销', 'error');
             setTimeout(() => {
-                this.swapCells(row1, col1, row2, col2); // 撤销交换
+                this.performSwap(row1, col1, row2, col2); // 只撤销交换，不再检查匹配
+                this.deselectCell(); // 确保取消选择状态
             }, 500);
         }
+    }
+
+    /**
+     * 执行交换操作（不检查匹配）
+     * @param {number} row1 第一个单元格行
+     * @param {number} col1 第一个单元格列
+     * @param {number} row2 第二个单元格行
+     * @param {number} col2 第二个单元格列
+     */
+    performSwap(row1, col1, row2, col2) {
+        // 交换数据
+        const temp = this.board[row1][col1];
+        this.board[row1][col1] = this.board[row2][col2];
+        this.board[row2][col2] = temp;
+
+        // 更新DOM
+        this.updateCellDisplay(row1, col1);
+        this.updateCellDisplay(row2, col2);
     }
 
     /**
